@@ -2,8 +2,6 @@
 Imports System.Drawing
 Imports System.Drawing.Drawing2D
 
-
-
 Public Class AttQuickPreview
 
     Inherits Grasshopper.Kernel.Attributes.GH_ComponentAttributes
