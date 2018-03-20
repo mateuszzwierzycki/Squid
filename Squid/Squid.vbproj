@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{37610205-09B3-43B9-BD15-7FE9B67CB1F8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Squid</RootNamespace>
+    <AssemblyName>Squid</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>Squid.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>Squid.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GH_IO">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Rhinoceros 4.0\Plug-ins\Grasshopper\GH_IO.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Grasshopper">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Rhinoceros 4.0\Plug-ins\Grasshopper\Grasshopper.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="RhinoCommon">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Rhinoceros 4.0\Plug-ins\Grasshopper\rh_common\RhinoCommon.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Net.Mail" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Components\AttQuickPreview.vb" />
+    <Compile Include="Components\CompDivide.vb" />
+    <Compile Include="Components\CompFillPath.vb" />
+    <Compile Include="Components\CompFlipOrder.vb" />
+    <Compile Include="Components\CompFont.vb" />
+    <Compile Include="Components\AttGrab.vb" />
+    <Compile Include="Components\CompClear.vb" />
+    <Compile Include="Components\CompDrawCurveEx.vb" />
+    <Compile Include="Components\CompFillRadial.vb" />
+    <Compile Include="Components\CompFillLinear.vb" />
+    <Compile Include="Components\CompAlpha.vb" />
+    <Compile Include="Components\CompImage.vb" />
+    <Compile Include="Components\CompOver.vb" />
+    <Compile Include="Components\CompParagraph.vb" />
+    <Compile Include="Components\CompQuickPreview.vb" />
+    <Compile Include="Components\CompReadBitmap.vb" />
+    <Compile Include="Components\CompDrawCurve.vb" />
+    <Compile Include="Components\CompFillColor.vb" />
+    <Compile Include="Components\CompFillTexture.vb" />
+    <Compile Include="Components\CompOutlineEx.vb" />
+    <Compile Include="Components\CompOutline.vb" />
+    <Compile Include="Components\CompSaveFile.vb" />
+    <Compile Include="Components\CompScreenGrab.vb" />
+    <Compile Include="Components\CompText.vb" />
+    <Compile Include="Components\CompFontList.vb" />
+    <Compile Include="Components\CompTextCurves.vb" />
+    <None Include="Components\CompUpdate.vb" />
+    <Compile Include="DrawClass\DrawBitmap.vb" />
+    <Compile Include="DrawClass\DrawCurveEx.vb" />
+    <Compile Include="DrawClass\DrawCurve.vb" />
+    <Compile Include="DrawClass\DrawFill.vb" />
+    <Compile Include="DrawClass\DrawFillCGradient.vb" />
+    <Compile Include="DrawClass\DrawFillColor.vb" />
+    <Compile Include="DrawClass\DrawFillLGradient.vb" />
+    <Compile Include="DrawClass\DrawFillPath.vb" />
+    <Compile Include="DrawClass\DrawFont.vb" />
+    <Compile Include="DrawClass\DrawMask.vb" />
+    <Compile Include="DrawClass\DrawImage.vb" />
+    <Compile Include="DrawClass\DrawOutline.vb" />
+    <Compile Include="DrawClass\DrawFillTexture.vb" />
+    <Compile Include="DrawClass\DrawParagraph.vb" />
+    <Compile Include="Instructions\InstrClear.vb" />
+    <Compile Include="Instructions\InstrMask.vb" />
+    <Compile Include="Instructions\InstrImage.vb" />
+    <Compile Include="Instructions\InstrCurveEx.vb" />
+    <Compile Include="Instructions\InstrCurve.vb" />
+    <Compile Include="Instructions\InstrSave.vb" />
+    <Compile Include="Form\MyPic.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Instructions\InstrText.vb" />
+    <Compile Include="Instructions\InstrUpdate.vb" />
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Params\ParamSquidFont.vb" />
+    <Compile Include="Params\ParamSquidFill.vb" />
+    <Compile Include="Params\ParamSquidInstr.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Instructions\InstrBase.vb" />
+    <Compile Include="Components\CompSquid.vb" />
+    <Compile Include="Components\AttSquid.vb" />
+    <Compile Include="Form\FormSquidPicture.Designer.vb">
+      <DependentUpon>FormSquidPicture.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\FormSquidPicture.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Params\ParamSquidOutline.vb" />
+    <Compile Include="Params\ParamSquidBitmap.vb" />
+    <Compile Include="Params\ParamSquidParagraph.vb" />
+    <Compile Include="Utils\ConvMatrix.vb" />
+    <Compile Include="Utils\descript.vb" />
+    <Compile Include="Utils\SaveAsTiffModule.vb" />
+    <Compile Include="Utils\SquidEffects.vb" />
+    <Compile Include="Utils\SquidGeometry.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormSquidPicture.resx">
+      <DependentUpon>FormSquidPicture.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NewFolder1\" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>Copy "$(TargetPath)" "$(TargetDir)\$(ProjectName).gha"
+                  Erase "$(TargetPath)"
+  </PostBuildEvent>
+  </PropertyGroup>
+</Project>
