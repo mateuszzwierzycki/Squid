@@ -35,7 +35,7 @@ Public Class InstrText
 
     End Sub
 
-    Friend Property Text As String
+    public property Text As String
         Get
             Return str
         End Get
@@ -44,7 +44,7 @@ Public Class InstrText
         End Set
     End Property
 
-    Friend Property Outline As DrawOutline
+    public property Outline As DrawOutline
         Set(value As DrawOutline)
             otl = value.Duplicate
         End Set
@@ -53,7 +53,7 @@ Public Class InstrText
         End Get
     End Property
 
-    Friend Property Fill As DrawFill
+    public property Fill As DrawFill
         Set(value As DrawFill)
             fil = value.Duplicate
         End Set
@@ -62,7 +62,7 @@ Public Class InstrText
         End Get
     End Property
 
-    Friend Property Font As DrawFont
+    public property Font As DrawFont
         Set(value As DrawFont)
             fnt = value.Duplicate
         End Set
@@ -71,7 +71,7 @@ Public Class InstrText
         End Get
     End Property
 
-    Friend Property Paragraph As DrawParagraph
+    public property Paragraph As DrawParagraph
         Set(value As DrawParagraph)
             par = value.Duplicate
         End Set
@@ -80,7 +80,7 @@ Public Class InstrText
         End Get
     End Property
 
-    Friend Property LayoutRectangle As Rectangle3d
+    public property LayoutRectangle As Rectangle3d
         Set(value As Rectangle3d)
             loc = value
         End Set

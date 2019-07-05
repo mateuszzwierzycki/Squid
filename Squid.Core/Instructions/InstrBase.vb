@@ -17,7 +17,7 @@ Public Class InstrBase
     ''' <value></value>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Friend Property InstructionType As String
+    public property InstructionType As String
         Get
             Return desc
         End Get
@@ -26,7 +26,7 @@ Public Class InstrBase
         End Set
     End Property
 
-    Friend Property FlipOrder As Boolean
+    public property FlipOrder As Boolean
         Get
             Return flip
         End Get
@@ -35,7 +35,7 @@ Public Class InstrBase
         End Set
     End Property
 
-    Friend Property OverWrite As Boolean
+    public property OverWrite As Boolean
         Get
             Return over
         End Get

@@ -1,6 +1,5 @@
 ﻿Imports System.Drawing
 Imports Grasshopper.Kernel
-Imports System.Windows.Forms
 
 Public Class FormSquidPicture
 
@@ -42,9 +41,9 @@ Public Class FormSquidPicture
 
     Friend Sub TransformPicture()
         Me.PicWindow.Size = New Size(pic.Width * zoom, pic.Height * zoom)
-        Me.PicWindow.Location = trans
+        Me.PicWindow.Location = New Point(trans.X, trans.Y)
         Me.DropShadow.Size = Me.PicWindow.Size
-        Me.DropShadow.Location = Me.PicWindow.Location + transdrop
+        Me.DropShadow.Location = Me.PicWindow.Location + New Point(transdrop.X, transdrop.Y)
         FormStatus()
     End Sub
 
@@ -87,7 +86,7 @@ Public Class FormSquidPicture
         PicWindow.Show()
         PicWindow.Size = pic.Size
         Me.DropShadow.Size = Me.PicWindow.Size
-        Me.DropShadow.Location = Me.PicWindow.Location + transdrop
+        Me.DropShadow.Location = Me.PicWindow.Location + New Point(transdrop.X, transdrop.Y)
         AutoTransform()
     End Sub
 
@@ -98,8 +97,8 @@ Public Class FormSquidPicture
     Dim temppt As New Drawing.Point
     Dim pres As Boolean
 
-    Private Sub Pic_DClick(sender As Object, e As Windows.Forms.MouseEventArgs) Handles Me.MouseDoubleClick, PicWindow.MouseDoubleClick
-        If e.Button = Windows.Forms.MouseButtons.Left Then
+    Private Sub Pic_DClick(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseDoubleClick, PicWindow.MouseDoubleClick
+        If e.Button = System.Windows.Forms.MouseButtons.Left Then
             If fullscreen Then
                 AutoTransform(0)
             Else
@@ -108,27 +107,27 @@ Public Class FormSquidPicture
         End If
     End Sub
 
-    Dim savef As New Windows.Forms.SaveFileDialog()
+    Dim savef As New System.Windows.Forms.SaveFileDialog()
 
-    Private Sub Pic_CtrlS(sender As Object, e As Windows.Forms.KeyEventArgs) Handles Me.KeyDown
-        If Windows.Forms.Control.ModifierKeys = Windows.Forms.Keys.Control And e.KeyCode = Windows.Forms.Keys.S Then
+    Private Sub Pic_CtrlS(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
+        If System.Windows.Forms.Control.ModifierKeys = System.Windows.Forms.Keys.Control And e.KeyCode = System.Windows.Forms.Keys.S Then
             saveAction()
         End If
 
-        If Windows.Forms.Control.ModifierKeys = Windows.Forms.Keys.Control And e.KeyCode = Windows.Forms.Keys.C Then
+        If System.Windows.Forms.Control.ModifierKeys = System.Windows.Forms.Keys.Control And e.KeyCode = System.Windows.Forms.Keys.C Then
 
             Dim picClip As New Bitmap(pic.Width, pic.Height)
             Using g As Graphics = Graphics.FromImage(picClip)
                 g.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
                 g.Clear(Color.White)
-                g.DrawImage(pic, New Drawing.Point(0, 0))
+                g.DrawImage(pic, New Drawing.PointF(0, 0))
             End Using
 
             System.Windows.Forms.Clipboard.SetImage(picClip)
 
         End If
 
-        If e.KeyCode = Windows.Forms.Keys.Home Then
+        If e.KeyCode = System.Windows.Forms.Keys.Home Then
 
             Dim ownerrect As RectangleF = (mycomponent.Attributes.Bounds)
 
@@ -149,13 +148,13 @@ Public Class FormSquidPicture
             nv.SetToViewport(Grasshopper.Instances.ActiveCanvas, 500)
         End If
 
-        If e.KeyCode = Windows.Forms.Keys.F1 Then
+        If e.KeyCode = System.Windows.Forms.Keys.F1 Then
 
             MsgBox(HelpText, MsgBoxStyle.OkOnly, "Squid Help")
 
         End If
 
-        If e.KeyCode = Windows.Forms.Keys.F11 Then
+        If e.KeyCode = System.Windows.Forms.Keys.F11 Then
 
             fullscreen = Not fullscreen
 
@@ -165,19 +164,19 @@ Public Class FormSquidPicture
                 DropShadow.Visible = False
                 fullscreenloc = Me.Location
                 fullscreensize = Me.Size
-                Me.FormBorderStyle = Windows.Forms.FormBorderStyle.None
+                Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
                 'Me.Location = New Point(0, 0)
                 'Me.Size = SystemInformation.PrimaryMonitorSize
                 Me.WindowState = FormWindowState.Maximized
-                Me.SizeGripStyle = Windows.Forms.SizeGripStyle.Hide
+                Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
                 AutoTransform(0)
             Else
                 PicWindow.BorderStyle = BorderStyle.FixedSingle
                 Me.WindowState = FormWindowState.Normal
-                Me.SizeGripStyle = Windows.Forms.SizeGripStyle.Show
+                Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show
                 Me.BackColor = Drawing.Color.FromArgb(236, 236, 236)
                 DropShadow.Visible = True
-                Me.FormBorderStyle = Windows.Forms.FormBorderStyle.SizableToolWindow
+                Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
                 Me.Location = fullscreenloc
                 Me.Size = fullscreensize
                 AutoTransform()
@@ -185,16 +184,16 @@ Public Class FormSquidPicture
 
         End If
 
-        If e.KeyCode = Windows.Forms.Keys.Escape Then
+        If e.KeyCode = System.Windows.Forms.Keys.Escape Then
 
             If fullscreen Then
                 PicWindow.BorderStyle = BorderStyle.FixedSingle
                 Me.WindowState = FormWindowState.Normal
-                Me.SizeGripStyle = Windows.Forms.SizeGripStyle.Show
+                Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show
                 fullscreen = Not fullscreen
                 Me.BackColor = Drawing.Color.FromArgb(236, 236, 236)
                 DropShadow.Visible = True
-                Me.FormBorderStyle = Windows.Forms.FormBorderStyle.SizableToolWindow
+                Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
                 Me.Location = fullscreenloc
                 Me.Size = fullscreensize
                 AutoTransform()
@@ -223,7 +222,7 @@ Public Class FormSquidPicture
 
     End Function
 
-    Private Sub Pic_MouseMove(sender As Object, e As Windows.Forms.MouseEventArgs) Handles PicWindow.MouseMove
+    Private Sub Pic_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles PicWindow.MouseMove
 
         If Not pres Then Return
         Me.PicWindow.Location += e.Location - temppt
@@ -231,8 +230,8 @@ Public Class FormSquidPicture
 
     End Sub
 
-    Private Sub Pic_MouseDown(sender As Object, e As Windows.Forms.MouseEventArgs) Handles PicWindow.MouseDown
-        If e.Button = Windows.Forms.MouseButtons.Left Or e.Button = Windows.Forms.MouseButtons.Right Then
+    Private Sub Pic_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles PicWindow.MouseDown
+        If e.Button = System.Windows.Forms.MouseButtons.Left Or e.Button = System.Windows.Forms.MouseButtons.Right Then
             temppt.X = 0
             temppt.Y = 0
             temppt = e.Location
@@ -240,8 +239,8 @@ Public Class FormSquidPicture
         End If
     End Sub
 
-    Private Sub Pic_MouseUp(sender As Object, e As Windows.Forms.MouseEventArgs) Handles PicWindow.MouseUp
-        If e.Button = Windows.Forms.MouseButtons.Left Or e.Button = Windows.Forms.MouseButtons.Right Then
+    Private Sub Pic_MouseUp(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles PicWindow.MouseUp
+        If e.Button = System.Windows.Forms.MouseButtons.Left Or e.Button = System.Windows.Forms.MouseButtons.Right Then
             Me.PicWindow.Location += e.Location - temppt
             trans = Me.PicWindow.Location
             TransformPicture()
@@ -286,8 +285,8 @@ Public Class FormSquidPicture
         TransformPicture()
     End Sub
 
-    Private Sub Form_Close(sender As Object, e As Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-        If e.CloseReason = Windows.Forms.CloseReason.UserClosing Then
+    Private Sub Form_Close(sender As Object, e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+        If e.CloseReason = System.Windows.Forms.CloseReason.UserClosing Then
             e.Cancel = True
             Me.Visible = False
             Grasshopper.Instances.DocumentEditor.Focus()
@@ -321,7 +320,7 @@ Public Class FormSquidPicture
         savef.Filter = "PNG (RGB) (*.png)|*.png|TIFF (CMYK+Alpha) (*.tif)|*.tif"
         savef.Title = "Save as..."
 
-        If savef.ShowDialog = Windows.Forms.DialogResult.OK Then
+        If savef.ShowDialog = System.Windows.Forms.DialogResult.OK Then
             Dim formstr As New String(savef.FileName)
 
             formstr = formstr.Substring(formstr.Length - 3, 3)

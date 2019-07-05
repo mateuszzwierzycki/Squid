@@ -23,7 +23,7 @@ Partial Class FormSquidPicture
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.DropShadow = New System.Windows.Forms.PictureBox()
-        Me.PicWindow = New Squid.MyPic()
+        Me.PicWindow = New MyPic()
         CType(Me.DropShadow, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PicWindow, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -40,7 +40,7 @@ Partial Class FormSquidPicture
         'PicWindow
         '
         Me.PicWindow.BackColor = System.Drawing.Color.White
-        Me.PicWindow.BackgroundImage = Global.Squid.My.Resources.Resources.background3
+        Me.PicWindow.BackgroundImage = My.Resources.Resources.background3
         Me.PicWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PicWindow.Location = New System.Drawing.Point(192, 153)
         Me.PicWindow.Name = "PicWindow"
@@ -74,5 +74,5 @@ Partial Class FormSquidPicture
 
     End Sub
     Friend WithEvents DropShadow As System.Windows.Forms.PictureBox
-    Friend WithEvents PicWindow As Squid.MyPic
+    Friend WithEvents PicWindow As MyPic
 End Class

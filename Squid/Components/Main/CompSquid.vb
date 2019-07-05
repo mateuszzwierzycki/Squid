@@ -36,7 +36,7 @@ Public Class CompSquid
         MyBase.AddedToDocument(document)
     End Sub
 
-    Protected Overrides Sub AppendAdditionalComponentMenuItems(menu As Windows.Forms.ToolStripDropDown)
+    Protected Overrides Sub AppendAdditionalComponentMenuItems(menu As System.Windows.Forms.ToolStripDropDown)
         MyBase.AppendAdditionalComponentMenuItems(menu)
 
         GH_DocumentObject.Menu_AppendItem(menu, "Autohide (affects all Squids)", AddressOf AutohideSwitch, True, autohide)
@@ -472,7 +472,7 @@ Public Class CompSquid
 
                                     Dim pg As DrawFillPath = dc.DrawCurve.Fill
 
-                                    Dim gpt As New List(Of Drawing.Point)
+                                    Dim gpt As New List(Of Drawing.PointF)
                                     Dim gpar As New List(Of Byte)
 
                                     For i As Integer = 0 To pg.GradientPoints.Count - 1 Step 1
@@ -519,7 +519,7 @@ Public Class CompSquid
                             '===NOW DRAW
 
                             Dim nc As Polyline = dc.DrawCurve.Curve
-                            Dim np As New List(Of Drawing.Point)
+                            Dim np As New List(Of Drawing.PointF)
                             Dim npt As New List(Of Byte)
 
                             For i As Integer = 0 To nc.Count - 1 Step 1
@@ -529,7 +529,7 @@ Public Class CompSquid
                             If nc.Count = 1 Then
                                 Dim pt As New Point3d(nc(0))
                                 If pt.Z > 0 Then
-                                    Dim r As Rectangle = PointToRect(nc(0), orientrect, pix)
+                                    Dim r As RectangleF = PointToRect(nc(0), orientrect, pix)
                                     g.FillEllipse(FillBrush, r)
                                     g.DrawEllipse(ColorPen, r)
                                     Exit Select
@@ -558,6 +558,8 @@ Public Class CompSquid
                                     npt.Add(Drawing2D.PathPointType.Line)
                                 End If
                             Next
+
+                            Dim ddd As New Drawing2D.GraphicsPath()
 
                             Dim gp As New Drawing2D.GraphicsPath(np.ToArray, npt.ToArray)
                             g.DrawPath(ColorPen, gp)
@@ -639,7 +641,7 @@ Public Class CompSquid
 
                                     Dim pg As DrawFillPath = dex.DrawCurveEx.Fill
 
-                                    Dim gpt As New List(Of Drawing.Point)
+                                    Dim gpt As New List(Of Drawing.PointF)
                                     Dim gpar As New List(Of Byte)
 
                                     For i As Integer = 0 To pg.GradientPoints.Count - 1 Step 1
@@ -688,7 +690,7 @@ Public Class CompSquid
 
 
                             Dim ngr As New GraphicsPath()
-                            Dim np As New List(Of Drawing.Point)
+                            Dim np As New List(Of Drawing.PointF)
                             Dim npt As New List(Of Byte)
 
                             For Each pl As Polyline In nc
@@ -841,8 +843,7 @@ Public Class CompSquid
 
 
     Sub FixTransforms(ByRef ntex As TextureBrush, ByRef tf As DrawFillTexture, ByRef picrect As Rectangle3d)
-
-        Dim transpt As New Drawing.Point(OrientPoint(tf.Rectangle.PointAt(0, 1), picrect, pix))
+        Dim transpt As PointF = OrientPoint(tf.Rectangle.PointAt(0, 1), picrect, pix)
 
         Dim rx As New Vector3d(tf.Rectangle.PointAt(1, 0) - tf.Rectangle.PointAt(0, 0))
         Dim ry As New Vector3d(tf.Rectangle.PointAt(0, 1) - tf.Rectangle.PointAt(0, 0))
@@ -875,7 +876,7 @@ Public Class CompSquid
 
     Sub FixImage(ByRef ti As DrawImage, ByRef picrect As Rectangle3d, ByRef G As Graphics)
 
-        Dim transpt As New Drawing.Point(OrientPoint(ti.Rectangle.PointAt(0, 1), picrect, pix))
+        Dim transpt As Drawing.PointF = OrientPoint(ti.Rectangle.PointAt(0, 1), picrect, pix)
         Dim angle As Single = 0
 
         G.TranslateTransform(transpt.X, transpt.Y)
@@ -906,7 +907,7 @@ Public Class CompSquid
 
     Sub FixImage(ByRef ti As DrawMask, ByRef picrect As Rectangle3d, ByRef G As Graphics)
 
-        Dim transpt As New Drawing.Point(OrientPoint(ti.Rectangle.PointAt(0, 1), picrect, pix))
+        Dim transpt As Drawing.PointF = OrientPoint(ti.Rectangle.PointAt(0, 1), picrect, pix)
         Dim angle As Single = 0
 
         G.TranslateTransform(transpt.X, transpt.Y)
@@ -936,8 +937,7 @@ Public Class CompSquid
     End Sub
 
     Sub FixText(ByRef ti As InstrText, ByRef picrect As Rectangle3d, ByRef G As Graphics)
-
-        Dim transpt As New Drawing.Point(OrientPoint(ti.LayoutRectangle.PointAt(0, 1), picrect, pix))
+        Dim transpt As Drawing.PointF = (OrientPoint(ti.LayoutRectangle.PointAt(0, 1), picrect, pix))
         Dim angle As Single = 0
 
         G.TranslateTransform(transpt.X, transpt.Y)

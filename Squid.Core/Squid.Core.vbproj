@@ -12,6 +12,8 @@
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,8 +46,19 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GH_IO, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a29997d2e6b4f97, processorArchitecture=MSIL">
+      <HintPath>..\packages\Grasshopper.0.9.76\lib\net35\GH_IO.dll</HintPath>
+    </Reference>
+    <Reference Include="Grasshopper, Version=1.0.0.20, Culture=neutral, PublicKeyToken=dda4f5ec2cd80803, processorArchitecture=MSIL">
+      <HintPath>..\packages\Grasshopper.0.9.76\lib\net35\Grasshopper.dll</HintPath>
+    </Reference>
+    <Reference Include="RhinoCommon, Version=5.1.30000.16, Culture=neutral, PublicKeyToken=552281e97c755530, processorArchitecture=MSIL">
+      <HintPath>..\packages\RhinoCommon.5.12.50810.13095\lib\net35\RhinoCommon.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -64,11 +77,20 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form\FormSquidPicture.Designer.vb">
-      <DependentUpon>FormSquidPicture.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form\FormSquidPicture.vb" />
-    <Compile Include="Form\MyPic.vb" />
+    <Compile Include="Goos\DrawBitmap.vb" />
+    <Compile Include="Goos\DrawCurve.vb" />
+    <Compile Include="Goos\DrawCurveEx.vb" />
+    <Compile Include="Goos\DrawFill.vb" />
+    <Compile Include="Goos\DrawFillCGradient.vb" />
+    <Compile Include="Goos\DrawFillColor.vb" />
+    <Compile Include="Goos\DrawFillLGradient.vb" />
+    <Compile Include="Goos\DrawFillPath.vb" />
+    <Compile Include="Goos\DrawFillTexture.vb" />
+    <Compile Include="Goos\DrawFont.vb" />
+    <Compile Include="Goos\DrawImage.vb" />
+    <Compile Include="Goos\DrawMask.vb" />
+    <Compile Include="Goos\DrawOutline.vb" />
+    <Compile Include="Goos\DrawParagraph.vb" />
     <Compile Include="Instructions\InstrBase.vb" />
     <Compile Include="Instructions\InstrClear.vb" />
     <Compile Include="Instructions\InstrCurve.vb" />
@@ -93,11 +115,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Params\ParamSquidBitmap.vb" />
+    <Compile Include="Params\ParamSquidFill.vb" />
+    <Compile Include="Params\ParamSquidFont.vb" />
+    <Compile Include="Params\ParamSquidInstr.vb" />
+    <Compile Include="Params\ParamSquidOutline.vb" />
+    <Compile Include="Params\ParamSquidParagraph.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form\FormSquidPicture.resx">
-      <DependentUpon>FormSquidPicture.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -106,6 +131,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -115,6 +141,125 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <None Include="packages.config" />
+    <None Include="Resources\divideicon.gh" />
+    <None Include="Resources\qprev.gh" />
+    <None Include="Resources\squidicon.gh" />
+    <None Include="Resources\texticon.gh" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\alpha.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\background3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\backgroundSmall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bitmapparam.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\divideicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\drawexicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\drawicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\drawimage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dropshadow.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filllinear2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fillparam.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fillpath.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fillradial2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fillsolid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filltex.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fliporder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fonticon2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fontparam.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hotpink.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\instrparam.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\listfont.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\outline3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\outlineex.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\outlineparam.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\over2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paragraphicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paragraphparam.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\qprev.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\read.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\squid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\text.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\textcurves.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="..\packages\RhinoCommon.5.12.50810.13095\build\net35\RhinoCommon.targets" Condition="Exists('..\packages\RhinoCommon.5.12.50810.13095\build\net35\RhinoCommon.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\RhinoCommon.5.12.50810.13095\build\net35\RhinoCommon.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\RhinoCommon.5.12.50810.13095\build\net35\RhinoCommon.targets'))" />
+    <Error Condition="!Exists('..\packages\Grasshopper.0.9.76\build\net35\Grasshopper.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Grasshopper.0.9.76\build\net35\Grasshopper.targets'))" />
+  </Target>
+  <Import Project="..\packages\Grasshopper.0.9.76\build\net35\Grasshopper.targets" Condition="Exists('..\packages\Grasshopper.0.9.76\build\net35\Grasshopper.targets')" />
 </Project>

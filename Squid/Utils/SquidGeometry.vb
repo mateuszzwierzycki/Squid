@@ -88,29 +88,25 @@ Module SquidGeometry
 
     End Function
 
-    Function PointToRect(pt As Point3d, DrawRect As Rhino.Geometry.Rectangle3d, Pix As Double) As Drawing.Rectangle
-
-        Dim center As New Drawing.Point(OrientPoint(pt, DrawRect, Pix))
+    Function PointToRect(pt As Point3d, DrawRect As Rhino.Geometry.Rectangle3d, Pix As Double) As Drawing.RectangleF
+        Dim center As Drawing.PointF = OrientPoint(pt, DrawRect, Pix)
         Dim rad As Double = pt.Z * Pix
 
-        Return New Drawing.Rectangle(center.X - rad, center.Y - rad, rad + rad, rad + rad)
+        Return New Drawing.RectangleF(center.X - rad, center.Y - rad, rad + rad, rad + rad)
     End Function
 
-    Function OrientPoint(Pt As Point3d, DrawRect As Rhino.Geometry.Rectangle3d, Pix As Double) As Drawing.Point
-        Dim np As New Drawing.Point
+    Function OrientPoint(Pt As Point3d, DrawRect As Rhino.Geometry.Rectangle3d, Pix As Double) As Drawing.PointF
+        Dim np As New Drawing.PointF
         Dim nv As New Vector3d(Pt - DrawRect.PointAt(3))
 
-        Return New Drawing.Point(nv.X * Pix, -nv.Y * Pix)
-
+        Return New Drawing.PointF(nv.X * Pix, -nv.Y * Pix)
     End Function
 
-    Function LineToCircle(L As Line, DrawRect As Rectangle3d, Pix As Double) As Drawing.Rectangle
-
-        Dim ps As New Drawing.Point(OrientPoint(L.From, DrawRect, Pix))
-
+    Function LineToCircle(L As Line, DrawRect As Rectangle3d, Pix As Double) As Drawing.RectangleF
+        Dim ps As Drawing.PointF = OrientPoint(L.From, DrawRect, Pix)
         Dim len As Double = L.Length * Pix
 
-        Return New Drawing.Rectangle(ps.X - len, ps.Y - len, len * 2, len * 2)
+        Return New Drawing.RectangleF(ps.X - len, ps.Y - len, len * 2, len * 2)
 
     End Function
 
